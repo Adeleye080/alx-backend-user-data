@@ -41,4 +41,4 @@ def unauthorized() -> str:
     Return:
         - 401 unauthorized error
     """
-    return jsonify({'error': 'unauthorized'})
+    return jsonify({'error': 'Unauthorized'}), 401
