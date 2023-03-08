@@ -24,7 +24,7 @@ if AUTH_TYPE == 'basic_auth':
 
 @app.before_request
 def bef_req() -> None:
-    """ """
+    """ Executed before each request that is handled. """
     if auth is None:
         pass
     else:
