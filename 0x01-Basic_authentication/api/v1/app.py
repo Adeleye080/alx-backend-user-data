@@ -12,14 +12,14 @@ import os
 app = Flask(__name__)
 app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
-dummy = """auth = None
+auth = None
 AUTH_TYPE = os.getenv('AUTH_TYPE')
 if AUTH_TYPE == 'auth':
     from api.v1.auth.auth import Auth
     auth = Auth()
-if AUTH_TYPE == 'basic_auth':
+dummy = """if AUTH_TYPE == 'basic_auth':
     from api.v1.auth.basic_auth import BasicAuth
-    auth = BasicAuth()
+    auth = BasicAuth()"""
 
 
 @app.before_request
@@ -39,12 +39,12 @@ def bef_req() -> None:
             if auth.current_user(request) is None:
                 abort(403, description='Forbidden')
 
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     ''' Not found handler
     '''
     return jsonify({'error': 'Not found'}), 404
-"""
 
 
 @app.errorhandler(403)
