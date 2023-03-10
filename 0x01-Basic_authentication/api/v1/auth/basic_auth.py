@@ -71,6 +71,9 @@ class BasicAuth(Auth):
             return None
 
     def current_user(self, request=None) -> TypeVar('User'):
+        """
+        Returns User instance
+        """
         auth_header = self.authorization_header(request)
         if auth_header is not None:
             base64_auth = self.extract_base64_authorization_header(auth_header)
