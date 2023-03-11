@@ -16,7 +16,7 @@ class SessionAuth(Auth):
         """
         Create Session ID for user
         params:
-            user_id (str): user's ID
+            - user_id (str): user's ID
         Return:
             - None if user_id is None or not a string
             - Session ID (str)
@@ -28,3 +28,17 @@ class SessionAuth(Auth):
         id = str(uuid4())
         self.user_id_by_session_id[id] = user_id
         return id
+
+    def user_id_for_session_id(self, session_id: str = None) -> str:
+        """
+        Retrieves user ID by session ID
+        params:
+            - session_id (str): current session ID
+        Return:
+            - None if session_id is None or not a string
+        """
+        if session_id is None:
+            return None
+        if not isinstance(session_id, str):
+            return None
+        return self.user_id_by_session_id.get(session_id)
