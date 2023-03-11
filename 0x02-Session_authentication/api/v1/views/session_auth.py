@@ -9,7 +9,7 @@ from os import getenv
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
-def auth_session():
+def login():
     """
     Compares user inputed email and password with the one in database
     Return:
@@ -38,3 +38,14 @@ def auth_session():
         # sets user session cookie
         resp.set_cookie(getenv('SESSION_NAME'), ses_ID)
     return resp
+
+@app_views.route('/auth_session/logout',
+                 method=['DELETE'], strict_slashes=False)
+def logout():
+    """
+    Log out user
+    """
+    from api.v1.app import auth
+    if auth.destroy_session(request):
+        return jsonify({}), 200
+    abort(404)
