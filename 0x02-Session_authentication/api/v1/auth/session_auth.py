@@ -39,6 +39,7 @@ class SessionAuth(Auth):
             - session_id (str): current session ID
         Return:
             - None if session_id is None or not a string
+            - user ID
         """
         if session_id is None:
             return None
@@ -60,7 +61,11 @@ class SessionAuth(Auth):
         """
         if request is None:
             return False
-        if self.session_cookie(request) is None:
+        session_id = self.session_cookie(request)
+        if session_id is None:
+            return False
+        user_id = self.user_id_for_session_id(session_id)
+        if user_id is None:
             return False
         if not self.user_id_for_session_id(self.current_user(request)):
             del self.user_id_by_session_id[self.session_cookie(request)]
