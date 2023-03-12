@@ -40,7 +40,7 @@ def login():
     return resp
 
 @app_views.route('/auth_session/logout',
-                 method=['DELETE'], strict_slashes=False)
+                 methods=['DELETE'], strict_slashes=False)
 def logout():
     """
     Log out user
