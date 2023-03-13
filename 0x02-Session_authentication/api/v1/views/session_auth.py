@@ -24,7 +24,7 @@ def login():
     # stores user inputed details in variable
     email = request.form.get('email')
     password = request.form.get('password')
-    # search database for user using sipplied credentials
+    # search database for user using supplied credentials
     users = User.search({'email': email})
     if users is None or users == []:
         return jsonify({'error': 'no user found for this email'}), 404
