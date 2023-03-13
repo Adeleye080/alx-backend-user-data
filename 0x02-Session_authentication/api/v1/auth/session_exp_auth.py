@@ -17,7 +17,7 @@ class SessionExpAuth(SessionAuth):
             self.session_duration = 0
 
     def create_session(self, user_id):
-        """ 
+        """
         Create Session for a user
         params:
             - user_id (str): user's ID
