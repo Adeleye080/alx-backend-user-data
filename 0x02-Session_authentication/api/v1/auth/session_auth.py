@@ -13,6 +13,7 @@ class SessionAuth(Auth):
     """
     Session Authorization protocol.
     """
+    # stores user ID using their session ID as key.
     user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:
